@@ -24,8 +24,8 @@ This is a **Face Recognition-based Attendance System** built using **OpenCV** an
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/anubhavlal07/attendance-system.git
-   cd attendance-system
+   git clone https://github.com/anubhavlal07/Attendance-Management.git
+   cd Attendance-Management
    ```
 
 2. Install the required dependencies:
@@ -41,7 +41,7 @@ This is a **Face Recognition-based Attendance System** built using **OpenCV** an
 
 4. Run the application:
    ```bash
-   python main.py
+   python attendance.py
    ```
 
 ## Usage
