@@ -14,7 +14,7 @@ import tkinter.font as font
 haarcasecade_path = "haarcascade_frontalface_default.xml"
 trainimagelabel_path = "Trainner.yml"
 trainimage_path = "TrainingImage"
-studentdetail_path = "StudentDetails\\studentdetails.csv"
+studentdetail_path = "StudentDetails/studentdetails.csv"
 attendance_path = "Attendance"
 
 def subjectChoose(text_to_speech):
@@ -90,14 +90,16 @@ def subjectChoose(text_to_speech):
                 timeStamp = datetime.datetime.fromtimestamp(ts).strftime("%H:%M:%S")
                 Hour, Minute, Second = timeStamp.split(":")
                 
-                path = os.path.join(attendance_path, sub)
-                if not os.path.exists(path):
-                    os.makedirs(path)
-                    
-                fileName = f"{path}/{sub}_{date}_{Hour}-{Minute}-{Second}.csv"
+                # Ensure the folder path exists for the given subject
+                subject_folder = os.path.join(attendance_path, sub)
+                if not os.path.exists(subject_folder):
+                    os.makedirs(subject_folder)
+
+                # Save attendance CSV in the subject folder
+                fileName = f"{subject_folder}/{sub}_{date}_{Hour}-{Minute}-{Second}.csv"
                 attendance.to_csv(fileName, index=False)
 
-                m = "Attendance Filled Successfully for " + sub
+                m = "Attendance filled successfully for " + sub
                 Notifica.configure(
                     text=m,
                     bg="black",
@@ -113,6 +115,7 @@ def subjectChoose(text_to_speech):
                 cam.release()
                 cv2.destroyAllWindows()
 
+                # Display the saved attendance in a new window
                 root = tk.Tk()
                 root.title("Attendance of " + sub)
                 root.configure(background="black")

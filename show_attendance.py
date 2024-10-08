@@ -29,24 +29,32 @@ def subjectchoose(text_to_speech):
             text_to_speech(t)
             return
         
-        df = [pd.read_csv(f) for f in filenames]
-        newdf = df[0]
-        
-        for i in range(1, len(df)):
-            newdf = newdf.merge(df[i], how="outer")
-        
-        newdf.fillna(0, inplace=True)
-        newdf["Attendance"] = 0
-        
-        for i in range(len(newdf)):
-            newdf["Attendance"].iloc[i] = str(int(round(newdf.iloc[i, 2:-1].mean() * 100))) + '%'
-        
-        newdf.to_csv("attendance.csv", index=False)
+        # Initialize an empty DataFrame to store merged attendance data
+        all_data = pd.DataFrame()
 
+        # Read each file and process attendance
+        for file in filenames:
+            df = pd.read_csv(file)
+            df['Present'] = 1  # Mark students as present in this timestamp
+            df['Timestamp'] = os.path.basename(file)  # Record the timestamp (from filename)
+            all_data = pd.concat([all_data, df[['Enrollment', 'Name', 'Present']]], ignore_index=True)
+
+        # Calculate attendance by counting appearances and dividing by the number of files
+        attendance_summary = all_data.groupby(['Enrollment', 'Name']).sum()  # Sum the 'Present' counts
+        attendance_summary['Attendance'] = (attendance_summary['Present'] / len(filenames)) * 100  # Calculate percentage
+        attendance_summary['Attendance'] = attendance_summary['Attendance'].apply(lambda x: f"{int(round(x))}%")  # Format as percentage
+            
+
+        # Save the summary to a CSV
+        fileName = f"{subject_directory}/{Subject} totalAttendance.csv"
+        attendance_summary.reset_index().to_csv(fileName, index=False)
+
+        # Display attendance in the Tkinter window
         root = tkinter.Tk()
         root.title("Attendance of " + Subject)
         root.configure(background="black")
-        cs = os.path.join(subject_directory, "attendance.csv")
+        fileName = f"{Subject} totalAttendance.csv"
+        cs = os.path.join(subject_directory, fileName)
         
         with open(cs) as file:
             reader = csv.reader(file)
@@ -69,7 +77,7 @@ def subjectchoose(text_to_speech):
                     c += 1
                 r += 1
         root.mainloop()
-        print(newdf)
+        print(attendance_summary)
 
     subject = Tk()
     subject.title("Subject...")
@@ -81,7 +89,7 @@ def subjectchoose(text_to_speech):
     titl.pack(fill=X)
     titl = tk.Label(
         subject,
-        text="Which Subject of Attendance?",
+        text="Subject Attendance",
         bg="black",
         fg="green",
         font=("arial", 25),
