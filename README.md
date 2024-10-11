@@ -1,7 +1,7 @@
 
-# Attendance System Using Face Recognition
+# Attendance-Management
 
-This is a **Face Recognition-based Attendance System** built using **OpenCV** and **Python**. The system uses a pre-trained Haar Cascade Classifier for face detection and **LBPH** (Local Binary Patterns Histograms) for face recognition. It allows real-time attendance marking for up to 50 students per session and stores the attendance records in a CSV file. The project includes a GUI developed using Tkinter, making it easy for users to select subjects and monitor attendance.
+This is a Face Recognition-based Attendance System built using OpenCV and Python. The system uses a pre-trained Haar Cascade Classifier for face detection and LBPH (Local Binary Patterns Histograms) for face recognition. It allows real-time attendance marking for up to 50 students per session and stores the attendance records in a CSV file. The project includes a GUI developed using Tkinter, making it easy for users to select subjects and monitor attendance.
 
 ## Features
 
@@ -12,15 +12,15 @@ This is a **Face Recognition-based Attendance System** built using **OpenCV** an
 - **GUI Interface**: A user-friendly Tkinter-based GUI for subject selection and attendance monitoring.
 - **Handles up to 50 Students** per session efficiently.
 
-## Technologies Used
+## Tech Stack
 
 - **Programming Language**: Python
 - **Libraries**: 
   - OpenCV (for face detection and recognition)
   - Pandas (for data handling)
   - Tkinter (for GUI)
-  
-## Installation
+
+## Run Locally
 
 1. Clone the repository:
    ```bash
@@ -44,17 +44,6 @@ This is a **Face Recognition-based Attendance System** built using **OpenCV** an
    python attendance.py
    ```
 
-## Usage
-
-1. Start the application and choose the subject from the GUI.
-2. The webcam will open and detect faces in real-time.
-3. Once a recognized face is detected, the system will automatically mark the attendance.
-4. Attendance records are saved in a CSV file in the following format:
-   ```csv
-   Student_ID, Name, Date, Time, Subject
-   ```
-
-
 ## How it Works
 
 1. **Face Detection**: The Haar Cascade Classifier detects faces from the webcam feed.
@@ -73,11 +62,15 @@ This is a **Face Recognition-based Attendance System** built using **OpenCV** an
 
 Feel free to fork this repository and submit pull requests for any improvements or bug fixes. Contributions are always welcome!
 
-## License
+## Screenshots
+**homePage**
+![App Screenshot](https://raw.githubusercontent.com/anubhavlal07/Attendance-Management/refs/heads/main/Project%20Snap/homePage.png)
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+**registerPage**
+![App Screenshot](https://raw.githubusercontent.com/anubhavlal07/Attendance-Management/refs/heads/main/Project%20Snap/register.png)
 
-## Author
+**takeAttendance**
+![App Screenshot](https://raw.githubusercontent.com/anubhavlal07/Attendance-Management/refs/heads/main/Project%20Snap/takeAttendance.png)
 
-**Anubhav Lal**  
-GitHub: [anubhavlal07](https://github.com/anubhavlal07)
+**checkAttendance**
+![App Screenshot](https://raw.githubusercontent.com/anubhavlal07/Attendance-Management/refs/heads/main/Project%20Snap/checkAttendance.png)
